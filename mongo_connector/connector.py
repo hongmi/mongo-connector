@@ -332,7 +332,7 @@ class Connector(threading.Thread):
             new_uri = self.address
         else:
             new_uri = self.copy_uri_options(hosts, self.address)
-        client = MongoClient(new_uri, tz_aware=self.tz_aware, **kwargs)
+        client = MongoClient(new_uri, tz_aware=self.tz_aware, unicode_decode_error_handler='ignore', **kwargs)
         if self.auth_key is not None:
             client["admin"].authenticate(self.auth_username, self.auth_key)
         return client
